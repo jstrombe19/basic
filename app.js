@@ -6,8 +6,26 @@ const convertedValue = document.getElementById('converted-value');
 const convertedValueLabel = document.getElementById('converted-value-label');
 const initialBase = document.getElementById('initial-base');
 const convertedBase = document.getElementById('converted-base');
+const conversionBases = new Array;
+const lowestBase = 10;
+const highestBase = 64;
 
 convertedValueLabel.textContent = `Here is the base-${order.length} value: `;
+
+conversionBases.push(lowestBase);
+conversionBases.push(highestBase);
+conversionBases.forEach(baseValue => {
+  const baseOption = document.createElement('option')
+  baseOption.value = baseValue;
+  baseOption.innerText = baseValue;
+  initialBase.append(baseOption);
+})
+conversionBases.forEach(baseValue => {
+  const baseOption = document.createElement('option')
+  baseOption.value = baseValue;
+  baseOption.innerText = baseValue;
+  convertedBase.append(baseOption);
+})
 
 conversionForm.addEventListener('submit', function(event) {
   event.preventDefault();
@@ -16,6 +34,12 @@ conversionForm.addEventListener('submit', function(event) {
   // dynamic:: allow for bi-directional conversion
   formData.set('converted-value', base10ToBase64(+numericValue));
   convertedValue.value = formData.get('converted-value');
+})
+
+conversionForm.addEventListener('change', function(event) {
+  event.preventDefault();
+  const numericValue = document.getElementById('numeric-value');
+  const convertedValue = document.getElementById('converted-value');
 })
 
 function base10ToBase64(number) {

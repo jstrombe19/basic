@@ -2,6 +2,7 @@ console.log('FULL SEND!');
 
 const order = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-";
 const conversionForm = document.getElementById('conversion-form');
+const convertedValue = document.getElementById('converted-value');
 
 conversionForm.addEventListener('submit', function(event) {
   event.preventDefault();
@@ -9,8 +10,7 @@ conversionForm.addEventListener('submit', function(event) {
   const numericValue = formData.get('numeric-value');
   // dynamic:: allow for bi-directional conversion
   formData.set('converted-value', base10ToBase64(+numericValue));
-  const convertedValue = formData.get('converted-value');
-  console.log(convertedValue);
+  convertedValue.value = formData.get('converted-value');
 })
 
 function base10ToBase64(number) {

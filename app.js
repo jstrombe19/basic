@@ -3,6 +3,9 @@ console.log('FULL SEND!');
 const order = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-";
 const conversionForm = document.getElementById('conversion-form');
 const convertedValue = document.getElementById('converted-value');
+const convertedValueLabel = document.getElementById('converted-value-label');
+
+convertedValueLabel.textContent = `Here is the base-${order.length} value: `;
 
 conversionForm.addEventListener('submit', function(event) {
   event.preventDefault();

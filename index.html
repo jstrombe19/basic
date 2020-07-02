@@ -12,7 +12,7 @@
   <br>
   <br>
   <form id="conversion-form">
-    <label for="numeric-value">Enter the numeric value you wish to convert: </label>
+    <label for="numeric-value">Enter the value you wish to convert: </label>
     <input 
       type="text" 
       name="numeric-value" 
@@ -21,7 +21,7 @@
       value=""
       >
     <br>
-    <label for="converted-value">Here is the converted base-64 equivalent value: </label>
+    <label id="converted-value-label" for="converted-value"></label>
     <input 
       type="text" 
       name="converted-value" 
@@ -29,6 +29,7 @@
       placeholder=""
       value=""
       >
+      <br>
     <input type="submit" value="Convert">
   </form>
 </body>

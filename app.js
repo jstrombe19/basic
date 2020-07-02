@@ -10,25 +10,27 @@ const conversionBases = new Array;
 const lowestBase = 10;
 const highestBase = 64;
 
-convertedValueLabel.textContent = `Here is the base-${order.length} value: `;
 
 // dynamically generate base options
 conversionBases.push(lowestBase);
 conversionBases.push(highestBase);
 conversionBases.forEach(baseValue => {
-  const baseOption = document.createElement('option')
-  baseOption.value = baseValue;
-  baseOption.innerText = baseValue;
-  initialBase.append(baseOption);
+  const initialBaseOption = document.createElement('option')
+  const convertedBaseOption = document.createElement('option')
+  initialBaseOption.value = baseValue;
+  convertedBaseOption.value = baseValue;
+  initialBaseOption.innerText = baseValue;
+  convertedBaseOption.innerText = baseValue;
+  initialBase.append(initialBaseOption);
+  convertedBase.append(convertedBaseOption);
 });
-conversionBases.forEach(baseValue => {
-  const baseOption = document.createElement('option')
-  baseOption.value = baseValue;
-  baseOption.innerText = baseValue;
-  convertedBase.append(baseOption);
-});
+
 // set the highest base option as the default value for the convertedBase dropdown
 convertedBase.lastChild.setAttribute('selected', true);
+let selectedConvertedBase = convertedBase.options[convertedBase.selectedIndex].value;
+convertedValueLabel.textContent = `Here is the base-${selectedConvertedBase} value: `;
+
+
 
 conversionForm.addEventListener('submit', function(event) {
   event.preventDefault();

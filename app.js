@@ -4,6 +4,8 @@ const order = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-"
 const conversionForm = document.getElementById('conversion-form');
 const convertedValue = document.getElementById('converted-value');
 const convertedValueLabel = document.getElementById('converted-value-label');
+const initialBase = document.getElementById('initial-base');
+const convertedBase = document.getElementById('converted-base');
 
 convertedValueLabel.textContent = `Here is the base-${order.length} value: `;
 

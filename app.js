@@ -1,4 +1,3 @@
-console.log('FULL SEND!');
 
 const order = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-";
 const conversionForm = document.getElementById('conversion-form');
@@ -35,24 +34,26 @@ convertedValueLabel.textContent = `Here is the base-${convertToBase} value: `;
 conversionForm.addEventListener('submit', function(event) {
   event.preventDefault();
   const formData = new FormData(conversionForm);
-  const numericValue = formData.get('numeric-value');
+  const initialValue = formData.get('initial-value');
   // dynamic:: allow for bi-directional conversion
-  formData.set('converted-value', base10ToBase64(+numericValue));
-  convertedValue.value = formData.get('converted-value');
+  if(convertFromBase == 10 && convertToBase == 64) {
+    formData.set('converted-value', base10ToBase64(+initialValue));
+    convertedValue.value = formData.get('converted-value');
+  } else if(convertFromBase == 64 && convertToBase == 10) {
+    formData.set('converted-value', base64ToBase10(initialValue));
+    convertedValue.value = formData.get('converted-value'); 
+  }
 })
 
 conversionSelection.addEventListener('input', function(event) {
   event.preventDefault();
   if(event.target == initialBase) {
     convertFromBase = event.target.value;
-    console.log('initial base was changed to: ', event.target.value);
   } else {
     convertToBase = event.target.value;
     convertedValueLabel.textContent = `Here is the base-${convertToBase} value: `;
-
-    console.log('converted base was changed to: ', event.target.value);
   }
-  // console.log('input target', event.target);
+  conversionForm.reset();
 })
 
 function base10ToBase64(number) {
@@ -68,9 +69,6 @@ function base10ToBase64(number) {
   }
   return string;
 }
-
-// dynamic:: the current configuration is only forward-compatible, meaning you can convert
-// a base-10 integer value into a base-64 string. 
 
 function base64ToBase10(string) {
   // dynamic:: order is an object, provided a key based on a dropdown selection

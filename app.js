@@ -12,6 +12,7 @@ const highestBase = 64;
 
 convertedValueLabel.textContent = `Here is the base-${order.length} value: `;
 
+// dynamically generate base options
 conversionBases.push(lowestBase);
 conversionBases.push(highestBase);
 conversionBases.forEach(baseValue => {
@@ -19,13 +20,15 @@ conversionBases.forEach(baseValue => {
   baseOption.value = baseValue;
   baseOption.innerText = baseValue;
   initialBase.append(baseOption);
-})
+});
 conversionBases.forEach(baseValue => {
   const baseOption = document.createElement('option')
   baseOption.value = baseValue;
   baseOption.innerText = baseValue;
   convertedBase.append(baseOption);
-})
+});
+// set the highest base option as the default value for the convertedBase dropdown
+convertedBase.lastChild.setAttribute('selected', true);
 
 conversionForm.addEventListener('submit', function(event) {
   event.preventDefault();

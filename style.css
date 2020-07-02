@@ -2,7 +2,7 @@ body {
   color: black;
 }
 
-.conversion-selector-section {
+#conversion-selector-section {
   display: flex;
   flex-direction: row;
 }

@@ -6,10 +6,13 @@ const convertedValue = document.getElementById('converted-value');
 const convertedValueLabel = document.getElementById('converted-value-label');
 const initialBase = document.getElementById('initial-base');
 const convertedBase = document.getElementById('converted-base');
+const conversionSelection = document.getElementById('conversion-selector-section');
 const conversionBases = new Array;
 const lowestBase = 10;
 const highestBase = 64;
 
+let convertFromBase = lowestBase;
+let convertToBase = highestBase;
 
 // dynamically generate base options
 conversionBases.push(lowestBase);
@@ -26,11 +29,8 @@ conversionBases.forEach(baseValue => {
 });
 
 // set the highest base option as the default value for the convertedBase dropdown
-convertedBase.lastChild.setAttribute('selected', true);
-let selectedConvertedBase = convertedBase.options[convertedBase.selectedIndex].value;
-convertedValueLabel.textContent = `Here is the base-${selectedConvertedBase} value: `;
-
-
+convertedBase.lastChild.setAttribute('selected', '');
+convertedValueLabel.textContent = `Here is the base-${convertToBase} value: `;
 
 conversionForm.addEventListener('submit', function(event) {
   event.preventDefault();
@@ -41,10 +41,18 @@ conversionForm.addEventListener('submit', function(event) {
   convertedValue.value = formData.get('converted-value');
 })
 
-conversionForm.addEventListener('change', function(event) {
+conversionSelection.addEventListener('input', function(event) {
   event.preventDefault();
-  const numericValue = document.getElementById('numeric-value');
-  const convertedValue = document.getElementById('converted-value');
+  if(event.target == initialBase) {
+    convertFromBase = event.target.value;
+    console.log('initial base was changed to: ', event.target.value);
+  } else {
+    convertToBase = event.target.value;
+    convertedValueLabel.textContent = `Here is the base-${convertToBase} value: `;
+
+    console.log('converted base was changed to: ', event.target.value);
+  }
+  // console.log('input target', event.target);
 })
 
 function base10ToBase64(number) {
